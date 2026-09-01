@@ -7,7 +7,7 @@ A university system administration and security project: Building an enterprise-
 ## 📊 Project Roadmap & Progress
 
 - [x] **Phase 1:** Static IP Configuration via Netplan
-- [ ] **Phase 2:** SSH Hardening (Key-Based Authentication Only)
+- [x] **Phase 2:** SSH Hardening (Key-Based Authentication Only)
 - [ ] **Phase 3:** Tailscale Encrypted Mesh VPN Setup
 - [ ] **Phase 4:** Apache2 Web Server & VirtualHost Configuration
 - [ ] **Phase 5:** UFW Firewall Hardening (Zero-Trust / Interface-bound)
@@ -19,30 +19,34 @@ A university system administration and security project: Building an enterprise-
 ## 🚀 Phase 1: Static IP Configuration (Netplan)
 
 ### Overview
-Converted the guest OS from dynamic DHCP to a deterministic static IP address in the local subnet to ensure predictable server accessibility and prevent connection drops.
+Converted the guest OS from dynamic DHCP to a deterministic static IP address in the local subnet to ensure predictable server accessibility.
 
 ### Configuration Applied
-The configuration was applied to `/etc/netplan/` using the systemd `networkd` renderer:
+Applied to \/etc/netplan/\ using systemd \
+etworkd\ renderer:
+- **Interface:** \ens33\
+- **Static IP:** \192.168.96.229/23\
+- **Gateway:** \192.168.96.1\
 
-```yaml
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    ens33:
-      dhcp4: no
-      addresses:
-        - 192.168.96.229/23
-      routes:
-        - to: default
-          via: 192.168.96.1
-      nameservers:
-        addresses:
-          - 1.1.1.1
-          - 8.8.8.8
+![Phase 1 Verification](screenshots/01-netplan-ip.png)
 
-Verification & Evidence
+---
 
-Tested network configuration with sudo netplan try.
-Applied permanently via sudo netplan apply.
-Verified static allocation (valid_lft forever) and public connectivity.
+## 🔐 Phase 2: SSH Hardening & Key-Based Authentication
+
+### Overview
+Eliminated password authentication attack vectors by enforcing modern cryptographic key-based authentication (Ed25519) and applying daemon-level security constraints.
+
+### Security Configurations Applied
+Added drop-in override at \/etc/ssh/sshd_config.d/99-hardened.conf\:
+- \PubkeyAuthentication yes\: Enabled public key authentication.
+- \PasswordAuthentication no\: Blocked all password-based logins.
+- \PermitEmptyPasswords no\: Prohibited blank password attempts.
+- \PermitRootLogin prohibit-password\: Prevented direct root access via password.
+- \MaxAuthTries 3\: Mitigated brute-force connection floods.
+
+### Verification & Evidence
+1. Successfully authenticated using \id_ed25519\ private key without password prompts.
+2. Verified that password login attempts are completely dropped with \Permission denied (publickey)\.
+
+![Phase 2 Verification](screenshots/02-ssh-denied.png)
