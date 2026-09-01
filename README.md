@@ -41,6 +41,7 @@ network:
           - 1.1.1.1
           - 8.8.8.8
 ```
+
 Verification & Evidence
 
 Tested network configuration with sudo netplan try.
