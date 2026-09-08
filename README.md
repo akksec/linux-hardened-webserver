@@ -8,7 +8,7 @@ A university system administration and security project: Building an enterprise-
 
 - [x] **Phase 1:** Static IP Configuration via Netplan
 - [x] **Phase 2:** SSH Hardening (Key-Based Authentication Only)
-- [ ] **Phase 3:** Tailscale Encrypted Mesh VPN Setup
+- [x] **Phase 3:** Tailscale Encrypted Mesh VPN Setup
 - [ ] **Phase 4:** Apache2 Web Server & VirtualHost Configuration
 - [ ] **Phase 5:** UFW Firewall Hardening (Zero-Trust / Interface-bound)
 - [ ] **Phase 6:** Fail2Ban Intrusion Prevention System
@@ -45,8 +45,18 @@ Added drop-in override at \/etc/ssh/sshd_config.d/99-hardened.conf\:
 - \PermitRootLogin prohibit-password\: Prevented direct root access via password.
 - \MaxAuthTries 3\: Mitigated brute-force connection floods.
 
-### Verification & Evidence
-1. Successfully authenticated using \id_ed25519\ private key without password prompts.
-2. Verified that password login attempts are completely dropped with \Permission denied (publickey)\.
-
 ![Phase 2 Verification](screenshots/02-ssh-denied.png)
+
+---
+
+## 🌐 Phase 3: Tailscale Encrypted Mesh VPN Tunnel
+
+### Overview
+Established an authenticated, peer-to-peer WireGuard-based encrypted mesh VPN tunnel between the Windows management host and the Ubuntu guest server to isolate administrative access.
+
+### Key Implementation Details
+- Virtual tunnel adapter created: \	ailscale0\
+- Assigned Overlay Private IPv4: \100.70.130.83\
+- Verified end-to-end transport connectivity via \	ailscale ping\ (successful pong reply) and authenticated SSH session over the overlay IP.
+
+![Phase 3 Verification](screenshots/03-tailscale-status.png)
