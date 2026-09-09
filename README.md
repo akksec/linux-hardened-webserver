@@ -10,7 +10,7 @@ A university system administration and security project: Building an enterprise-
 - [x] **Phase 2:** SSH Hardening (Key-Based Authentication Only)
 - [x] **Phase 3:** Tailscale Encrypted Mesh VPN Setup
 - [x] **Phase 4:** Apache2 Web Server & VirtualHost Configuration
-- [ ] **Phase 5:** UFW Firewall Hardening (Zero-Trust / Interface-bound)
+- [x] **Phase 5:** UFW Firewall Hardening (Zero-Trust / Interface-bound)
 - [ ] **Phase 6:** Fail2Ban Intrusion Prevention System
 - [ ] **Phase 7:** Node.js Application with Apache Reverse Proxy
 
@@ -73,3 +73,18 @@ Deployed production-ready Apache2 HTTP server, isolated content into a dedicated
 - Deactivated default site (`000-default.conf`) and confirmed syntax validation (`Syntax OK`).
 
 ![Phase 4 Verification](screenshots/04-apache-vhost.png)
+
+---
+
+## 🔥 Phase 5: UFW Firewall Hardening (Zero-Trust Model)
+
+### Overview
+Configured Uncomplicated Firewall (UFW) enforcing default-deny ingress and interface-bound port filtering to minimize exposure surface.
+
+### Security Rules Implemented
+- Default Ingress Policy: `deny (incoming)`
+- Default Egress Policy: `allow (outgoing)`
+- Public Web Ports: `80/tcp` (HTTP) & `443/tcp` (HTTPS) permitted from all sources.
+- Management Access: `22/tcp` (SSH) is strictly bound to the `tailscale0` VPN interface, completely blocking unauthorized access attempts originating from the physical local area network (LAN).
+
+![Phase 5 Verification](screenshots/05-ufw-status.png)
