@@ -1,0 +1,18 @@
+# Phase 7: Node.js Systemd Daemon Service
+# Location: /etc/systemd/system/node-app.service
+
+[Unit]
+Description=Node.js Sample Reverse Proxy Backend
+After=network.target
+
+[Service]
+Type=simple
+User=akk
+WorkingDirectory=/home/akk/node-app
+ExecStart=/home/akk/.nvm/versions/node/v22.14.0/bin/node /home/akk/node-app/app.js
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
