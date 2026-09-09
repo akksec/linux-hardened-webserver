@@ -11,7 +11,7 @@ A university system administration and security project: Building an enterprise-
 - [x] **Phase 3:** Tailscale Encrypted Mesh VPN Setup
 - [x] **Phase 4:** Apache2 Web Server & VirtualHost Configuration
 - [x] **Phase 5:** UFW Firewall Hardening (Zero-Trust / Interface-bound)
-- [ ] **Phase 6:** Fail2Ban Intrusion Prevention System
+- [x] **Phase 6:** Fail2Ban Intrusion Prevention System
 - [ ] **Phase 7:** Node.js Application with Apache Reverse Proxy
 
 ---
@@ -88,3 +88,19 @@ Configured Uncomplicated Firewall (UFW) enforcing default-deny ingress and inter
 - Management Access: `22/tcp` (SSH) is strictly bound to the `tailscale0` VPN interface, completely blocking unauthorized access attempts originating from the physical local area network (LAN).
 
 ![Phase 5 Verification](screenshots/05-ufw-status.png)
+
+---
+
+## 🚫 Phase 6: Fail2Ban Intrusion Prevention System
+
+### Overview
+Integrated Fail2Ban to monitor authentication telemetry and automatically ban IP addresses demonstrating repeated failed authentication patterns or brute-force behavior.
+
+### Security Configuration
+Applied custom jail configuration at `/etc/fail2ban/jail.local`:
+- Monitored Jail: `[sshd]`
+- Telemetry Backend: `systemd` (journald-integrated)
+- Rate Limits: Threshold of 3 failed authentication attempts (`maxretry = 3`) within a 10-minute discovery window (`findtime = 10m`).
+- Ban Penalty: 24-hour network ban (`bantime = 24h`) enforced via dynamic packet filtering.
+
+![Phase 6 Verification](screenshots/06-fail2ban-status.png)
