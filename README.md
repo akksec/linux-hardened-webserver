@@ -1,4 +1,4 @@
- # 🛡️ Production-Grade Hardened Linux Web Server
+ # Production-Grade Hardened Linux Web Server
 
 An enterprise-grade, secured Linux Web Server deployed on **Ubuntu Server** in a virtualized **VMware Workstation (Bridged Mode)** environment. Engineered strictly following **Defense-in-Depth** and **Zero-Trust** architectural principles.
 
@@ -42,6 +42,10 @@ An enterprise-grade, secured Linux Web Server deployed on **Ubuntu Server** in a
                             └───────────────────────────┘
 ```
 
+
+---
+
+
 📊 Project Roadmap & Progress (100% Complete)
 
     Phase 1: Static IP Configuration via Netplan
@@ -58,6 +62,10 @@ An enterprise-grade, secured Linux Web Server deployed on **Ubuntu Server** in a
 
     Phase 7: Node.js Application with Apache Reverse Proxy
 
+
+---
+
+
 🚀 Phase 1: Static IP Configuration (Netplan)
 
     Objective: Converted guest OS from dynamic DHCP to deterministic static IP addressing.
@@ -72,7 +80,12 @@ An enterprise-grade, secured Linux Web Server deployed on **Ubuntu Server** in a
 
     Evidence: valid_lft forever verified via ip addr show.
 
-![Image](screenshots/01-netplan-ip.png)
+<img width="855" height="200" alt="01-netplan-ip png" src="https://github.com/user-attachments/assets/f27f18d2-909d-4691-b009-1668c3f96130" />
+
+
+---
+
+
 🔐 Phase 2: SSH Hardening & Key-Based Authentication
 
     Objective: Eradicated password authentication vectors by restricting access exclusively to Ed25519 cryptographic keys.
@@ -89,7 +102,12 @@ An enterprise-grade, secured Linux Web Server deployed on **Ubuntu Server** in a
 
     Evidence: Connection attempts using password-only auth rejected with Permission denied (publickey).
 
-![Image](screenshots/02-ssh-denied.png)
+<img width="1086" height="415" alt="02-ssh-denied png" src="https://github.com/user-attachments/assets/acf5b6fc-906a-4bcd-8780-755aaf9a1d21" />
+
+
+---
+
+
 🌐 Phase 3: Tailscale Encrypted Mesh VPN Tunnel
 
     Objective: Established peer-to-peer encrypted WireGuard mesh VPN between management workstation and server.
@@ -100,7 +118,12 @@ An enterprise-grade, secured Linux Web Server deployed on **Ubuntu Server** in a
 
     Evidence: Verified bidirectional mesh reachability via tailscale ping and SSH sessions over overlay IP.
 
-![Image](screenshots/03-tailscale-status.png)
+<img width="947" height="168" alt="03-tailscale-status png" src="https://github.com/user-attachments/assets/7a8ab704-943f-411d-82d9-38252280d9f7" />
+
+
+---
+
+
 🌐 Phase 4: Apache2 Web Server & VirtualHost
 
     Objective: Deployed Apache HTTP server with dedicated document root and proxy modules.
@@ -109,7 +132,12 @@ An enterprise-grade, secured Linux Web Server deployed on **Ubuntu Server** in a
 
     Evidence: Configuration passed validation (Syntax OK) and served content from /var/www/site/public_html.
 
-![Image](screenshots/04-apache-vhost.png)
+<img width="1917" height="1017" alt="04-apache-vhost" src="https://github.com/user-attachments/assets/dac708cc-fca2-4868-8d70-d001083574b3" />
+
+
+---
+
+
 🔥 Phase 5: UFW Firewall Hardening (Zero-Trust Model)
 
     Objective: Enforced default-deny ingress posture with interface-bound rule restrictions.
@@ -122,7 +150,12 @@ An enterprise-grade, secured Linux Web Server deployed on **Ubuntu Server** in a
 
         Management Port: 22/tcp (SSH) strictly restricted to interface tailscale0 (LAN connections dropped).
 
-![Image](screenshots/05-ufw-status.png)
+<img width="1331" height="365" alt="05-ufw-status" src="https://github.com/user-attachments/assets/30416bdb-ec38-49df-a4da-7c51910caa7d" />
+
+
+---
+
+
 🚫 Phase 6: Fail2Ban Intrusion Prevention System
 
     Objective: Real-time telemetry monitoring to prevent SSH brute-force floods.
@@ -133,7 +166,13 @@ An enterprise-grade, secured Linux Web Server deployed on **Ubuntu Server** in a
 
         Threshold: 3 failed attempts within 10 minutes triggers 24-hour firewall ban.
 
-![Image](screenshots/06-fail2ban-status.png)
+<img width="937" height="261" alt="06-fail2ban-status png " src="https://github.com/user-attachments/assets/aba87ee4-adaa-4574-82e5-5239886df11e" />
+
+
+---
+
+
+
 ⚡ Phase 7: Node.js (via NVM) & Apache Reverse Proxy
 
     Objective: Internalized Node.js backend application behind Apache reverse proxy architecture.
@@ -150,4 +189,7 @@ An enterprise-grade, secured Linux Web Server deployed on **Ubuntu Server** in a
 
     Evidence: HTTP query to port 80 successfully served JSON payload from Node.js with Apache header verification.
 
-![Image](screenshots/07-reverse-proxy-curl.png
+<img width="1917" height="602" alt="07-reverse-proxy-curl" src="https://github.com/user-attachments/assets/a8653823-8515-43a4-bb59-726aa69bb2d5" />
+
+
+---
