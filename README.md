@@ -1,5 +1,14 @@
  # Production-Grade Hardened Linux Web Server
 
+<p align="left">
+  <img src="https://img.shields.io/badge/Ubuntu-24.04%20LTS-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" />
+  <img src="https://img.shields.io/badge/Apache-2.4-D22128?style=for-the-badge&logo=apache&logoColor=white" />
+  <img src="https://img.shields.io/badge/Node.js-LTS-339933?style=for-the-badge&logo=node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tailscale-VPN-24292E?style=for-the-badge&logo=tailscale&logoColor=white" />
+  <img src="https://img.shields.io/badge/Security-Fail2Ban%20%7C%20UFW-blue?style=for-the-badge&logo=shield" />
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" />
+</p>
+
 An enterprise-grade, secured Linux Web Server deployed on **Ubuntu Server** in a virtualized **VMware Workstation (Bridged Mode)** environment. Engineered strictly following **Defense-in-Depth** and **Zero-Trust** architectural principles.
 
 ---
